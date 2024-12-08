@@ -28,3 +28,8 @@
         $ git add .
         ```
 
+    3. 커밋하기
+        ```bash
+        $ git commit -m "My first commit"
+        ```
+
