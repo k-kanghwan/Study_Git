@@ -33,3 +33,7 @@
         $ git commit -m "My first commit"
         ```
 
+3. 다른 커밋으로 시간여행하기
+    1. `git log`: 커밋 확인
+        - git log 명령은 최신 커밋부터 보여줌
+    2. 
