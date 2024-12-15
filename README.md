@@ -25,7 +25,8 @@
     - [소스트리 설치하기](#소스트리-설치하기)
     - [비주얼 스튜디오 코드 설치하기](#비주얼-스튜디오-코드-설치하기)
     - [GitHub 둘러보기](#github-둘러보기)
-  - [Chapter 2 : 혼자서 Git으로 버전 관리하기](#chapter-2--혼자서-git으로-버전-관리하기)
+  - [Chapter 2 ~ Chapter 3 : GIT GUI With. SourceTree](#chapter-2--chapter-3--git-gui-with-sourcetree)
+  - [Chapter 4 : 둘 이상의 원격 저장소로 협업하기](#chapter-4--둘-이상의-원격-저장소로-협업하기)
 
 
 ## Chapter 0 : 빠른 실습으로 Git, GitHub 감 익히기
@@ -110,8 +111,8 @@
 
 - **Git**: 분산 버전 관리 시스템으로, 파일 변경 이력 관리 및 협업을 위한 도구.
 - **GitHub**: Git을 기반으로 한 웹 서비스로, 소스 코드 호스팅 및 협업 기능을 제공.
-- **GUI** (Graphical User Interface): 그래픽 사용자 인터페이스로, 명령어 대신 그래픽 요소로 시스템과 상호작용하는 방식.
-- **CLI** (Command Line Interface): 명령어를 입력해 시스템과 상호작용하는 텍스트 기반 인터페이스.
+- **GUI** <sup>Graphical User Interface</sup> : 그래픽 사용자 인터페이스로, 명령어 대신 그래픽 요소로 시스템과 상호작용하는 방식.
+- **CLI** <sup>Command Line Interface</sup>: 명령어를 입력해 시스템과 상호작용하는 텍스트 기반 인터페이스.
 - **Git Bash**: Git을 명령어 기반으로 사용할 수 있게 해주는 터미널 프로그램. Git과 Bash 쉘을 지원.
 - **commit**: Git에서 파일의 변경 사항을 저장하는 단위. 각 커밋은 고유한 ID를 가짐.
 - **log**: Git에서 커밋 이력을 확인할 수 있는 명령어. `git log` 명령어를 사용해 커밋 내역을 볼 수 있음.
@@ -136,6 +137,51 @@
 ### GitHub 둘러보기
 > 책 참조
 
-## Chapter 2 : 혼자서 Git으로 버전 관리하기
+## Chapter 2 ~ Chapter 3 : GIT GUI <sub>With. SourceTree</sub>
+- 브랜치 : 줄기를 나누어 작업할 수 있는 기능
+- HEAD : 브랜치 혹은 커밋을 가리키는 포인터
+- 브랜치 작성 순서
+    1. 브랜치 생성
+    2. 생성된 브랜치 이동
+    3. 브랜치에서 커밋
+    4. 코딩이 완료되면 브랜치 병합
+    5. 개발 완료된 브랜치 삭제
+
+    > - 보통 하나의 개발 브랜치에는 한 사람만 작업해서 올리는 것이 바람직
+    > - 원격 저장소에는 미리 브랜치 규칙을 정하는 것이 일반적
+    >   - 규칙 예시
+    >       1. `main` 브랜치에는 직접 커밋을 올리지 않는다(동시에 작업하다 꼬일 수 있으니).
+    >       2. 기능 개발을 하기 전에 `main` 브랜치를 기준으로 새로운 브랜치를 만든다.
+    >       3. 이 브랜치 이름은 `feature/기능이름` 형식으로 하고 한 명만 커밋을 올린다.
+    >       4. `feature/기능이름` 브랜치에서 기능 개발이 끝나면 `main` 브랜치에 이를 합친다.
+    >
+
+- 병합 커밋 <sup>merge commit</sup>
+- 빨리 감기 <sup>fast-forward</sup>
+- 충돌 <sup>conflict</sup>
+- 풀 리퀘스트<sup>pull request</sup> : 브랜치를 합치는 예의 바른 방법
+    - 협력자에게 브랜치 병합을 요청하는 메시지를 보내는 것
+    - 1. 수락(Accept)
+    - 2. 수정 요청(Request change)
+    - 3. 병합(Merge pull request)
+    - 패치(Fetch) : Git에서 새로운 이력을 업데이트
+        > `Pull`: 실제 코드를 내려 받음
+        > `Fetch`: 그래프만 업데이트
+
+- 릴리즈 : 개발이 완료되었습니다. 출시하자!
+    - 프로그램을 출시하는 것
+    - 참고 - LTS(Long Time Support) 일반적인 버전보다 장기간에 걸쳐 지원하도록 특별히 만들어진 버전
+
+    - **VERSION** 
+        - ver 1<sup>a)</sup> .0<sup>b)</sup>.0<sup>c)</sup>
+            a) : Major - 사용자들이 크게 느낄 변화
+            b) : Minor - 작은 변화 등
+            c) : Maintenance - 버그나 유지 보수 등 작은 수정
+    
+    - **태그**: 특정 커밋에 포스트잇 붙이기
+
+## Chapter 4 : 둘 이상의 원격 저장소로 협업하기
+- 포크(fork) : 다른 사람의 원격 저장소를 내 계정의 원격 저장소로 복사해 오는 것
+
 
 
