@@ -29,6 +29,7 @@
   - [Chapter 4 : 둘 이상의 원격 저장소로 협업하기](#chapter-4--둘-이상의-원격-저장소로-협업하기)
   - [Chapter 5 : 실무 사례와 함께 Git 다루기](#chapter-5--실무-사례와-함께-git-다루기)
   - [Chapter 6 : GitHub 100% 활용하기](#chapter-6--github-100-활용하기)
+  - [Chapter 7 : CLI 환경에서 Git 명령어 살펴보기](#chapter-7--cli-환경에서-git-명령어-살펴보기)
 
 
 ## Chapter 0 : 빠른 실습으로 Git, GitHub 감 익히기
@@ -119,7 +120,8 @@
 - **commit**: Git에서 파일의 변경 사항을 저장하는 단위. 각 커밋은 고유한 ID를 가짐.
 - **log**: Git에서 커밋 이력을 확인할 수 있는 명령어. `git log` 명령어를 사용해 커밋 내역을 볼 수 있음.
 - **checkout**: 특정 브랜치나 커밋으로 작업 공간을 변경하는 Git 명령어. `git checkout <브랜치명>`으로 사용.
-- **로컬 저장소**: 사용자의 컴퓨터에 저장된 Git 레포지토리로, 소스 코드와 이력을 포함.
+- **워킹트리**<sup>working tree</sup>: 작업폴더 [.git]폴더를 뺀 나머지 부분이 워킹트리.
+- **로컬 저장소**: 사용자의 컴퓨터에 저장된 Git 레포지토리로, 소스 코드와 이력을 포함. [.git]폴더가 로컬 저장소
 - **원격 저장소**: GitHub, GitLab 등 외부 서버에 호스팅된 Git 레포지토리로, 협업을 위한 공유 공간.
 - **repository**: 프로젝트의 소스 코드 및 변경 이력을 저장하는 Git 저장소. 로컬과 원격 저장소가 있음.
 - **push**: 로컬 저장소의 변경 사항을 원격 저장소로 전송하는 Git 명령어. `git push`를 사용.
@@ -271,3 +273,66 @@
             > 히스토리가 한줄로 남는다는 장점이 있음
         - 3. 리베이스해서 병합<sup>Rebase and merge</sup>
 
+## Chapter 7 : CLI 환경에서 Git 명령어 살펴보기
+- 용어정리
+    - **워킹트리** : 일반적인 작업이 일어나는 곳
+    - **로컬 저장소** : .git 폴더, 커밋은 로컬 저장소에 저장
+    - **원격 저장소** : GitHub 저장소, 로컬 저장소를 업로드하는 곳
+    - **Git 저장소** : 엄밀하게는 로컬 저장소, 넓은 의미로 작업 폴더(워킹트리 + 로컬저장소)를 의미하기도 함
+<br>
+
+- CLI 명령어(기본)
+
+    | Command | Description          |
+    | :-----: | -------------------- |
+    |   pwd   | 현재 경로 출력       |
+    |  ls -a  | 숨김까지 리스트 출력 |
+    |  mkdir  | 폴더 생성            |
+
+- CLI 명령어(Git)
+    > \<something> : 필수인자
+    > [something] : 옵션인자
+
+    | Command                                        | Description                                             |
+    | ---------------------------------------------- | ------------------------------------------------------- |
+    | status -s                                      | 짧게 요약해서 알려줌                                    |
+    | git commit -a                                  | add 명령어 생략, untracked 파일은 커밋되지 않음         |
+    | git push [-u] [원격 저장소 별명] [브랜치 이름] | 원격 저장소 업로드, -u 옵션으로 브랜치의 업스트림 등록  |
+    | git pull                                       | git fetch + git merge                                   |
+    | git fetch [원격 저장소 별명] [브랜치 이름]     | 로컬 저장소와 동기화                                    |
+    | git merge <대상 브랜치>                        | 지정한 브랜치의 커밋들을 현재 브랜치 및 워킹트리에 반영 |
+    | git reset [파일명] ...                         | 언스테이징 (mixed, soft, hard)                          |
+    | git log -n<숫자>                               | 최신 n개의 커밋만 살펴봄                                |
+    | git help <명령어>                              | 해당 명령어의 도움말을 표시                             |
+    |                                                |                                                         |
+
+- Git 저장소 초기화하기
+    ```bash
+    $ git init -b main # main 브랜치 초기화 및 git 저장소 생성
+    $ git config --global user.name <이름>
+    $ git config --global user.name  # 설정된 이름 확인
+    $ git config core.editor  # 설정된 기본 에디터 확인
+    $ git config --global user.email
+    $ git config --global color.ui auto  # Git Bash 창의 Git 컬러가 자동으로 설정
+    ```
+
+- Git 명령어 옵션 설정
+    | Command                                  | Description               |
+    | :--------------------------------------- | ------------------------- |
+    | git config --list                        | 현재 프로젝트의 모든 옵션 |
+    | git config --global <옵션명>             | 지정한 옵션의 설정        |
+    | git config --global <옵션명> <새로운 값> | 값을 새로 설정            |
+    | git config --global --unset <옵션명>     | 옵션을 삭제               |
+
+    > **우선순위**
+    > local<sup>지역</sup> > global<sup>전역</sup> > system<sup>시스템</sup>
+
+
+- 좋은 커밋 메시지의 7가지 규칙
+    - 제목과 본문을 빈 행으로 구분합니다.
+    - 제목을 50글자 이내로 제한합니다.
+    - 제목의 첫 글자는 대문자로 작성합니다.
+    - 제목에는 마침표를 넣지 않습니다.
+    - 제목은 명령문으로(영어로 쓸 경우 동사원형(현재형)으로 시작)
+    - 본문의 각 행은 72글자 내로 제한합니다.
+    - 어떻게보다는 무엇과 왜를 설명합니다.
