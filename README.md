@@ -8,12 +8,16 @@
 ★ : Importance
 -->
 
-# 깃 배우기 - 팀 개발을 위한 Git, GitHub 시작하기
+--- 
+# Git, GitHub
+---
+
+<br>
 
 > [터미널 명령 참조](https://github.com/0nn0/terminal-mac-cheatsheet/blob/master/한국어/README.markdown "Go to https://github.com/0nn0/terminal-mac-cheatsheet/blob/master/한국어/README.markdown")
 
 ## Table of Contents
-- [깃 배우기 - 팀 개발을 위한 Git, GitHub 시작하기](#깃-배우기---팀-개발을-위한-git-github-시작하기)
+- [Git, GitHub](#git-github)
   - [Table of Contents](#table-of-contents)
   - [Chapter 0 : 빠른 실습으로 Git, GitHub 감 익히기](#chapter-0--빠른-실습으로-git-github-감-익히기)
     - [로컬저장소에서 커밋 관리하기](#로컬저장소에서-커밋-관리하기)
