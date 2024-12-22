@@ -13,6 +13,7 @@
 > - 참조 URL
 >   - [GitHub 치트 시트 : https://education.github.com/git-cheat-sheet-education.pdf](https://education.github.com/git-cheat-sheet-education.pdf "Go to https://education.github.com/git-cheat-sheet-education.pdf")
 >   - [Pro Git : https://git-scm.com/book/ko/v2](https://git-scm.com/book/ko/v2 "Go to https://git-scm.com/book/ko/v2")
+>   - [터미널 명령 참조 : https://github.com/0nn0/terminal-mac-cheatsheet/blob/master/한국어/README.markdown](https://github.com/0nn0/terminal-mac-cheatsheet/blob/master/한국어/README.markdown "Go to https://github.com/0nn0/terminal-mac-cheatsheet/blob/master/한국어/README.markdown")
 
 > - Conventional commits
 >    |   분류   | 의미                                                                                            |
@@ -30,7 +31,6 @@
 
 <br>
 
-> [터미널 명령 참조](https://github.com/0nn0/terminal-mac-cheatsheet/blob/master/한국어/README.markdown "Go to https://github.com/0nn0/terminal-mac-cheatsheet/blob/master/한국어/README.markdown")
 
 ## Table of Contents
 - [Git, GitHub](#git-github)
@@ -52,6 +52,10 @@
   - [Chapter 7 : CLI 환경에서 Git 명령어 살펴보기](#chapter-7--cli-환경에서-git-명령어-살펴보기)
   - [Chapter 8 : CLI 환경에서 브랜치 생성 및 조작하기](#chapter-8--cli-환경에서-브랜치-생성-및-조작하기)
   - [Chapter 9 : Git 내부 동작 원리](#chapter-9--git-내부-동작-원리)
+- [Git CLI 중급](#git-cli-중급)
+  - [Chapter 1 : 중급 CLI 명령어 1](#chapter-1--중급-cli-명령어-1)
+  - [Chapter 2 : 중급 CLI 명령어 2](#chapter-2--중급-cli-명령어-2)
+  - [Chapter 3 : 기타 CLI 명령어](#chapter-3--기타-cli-명령어)
 - [Git 명령어 요약](#git-명령어-요약)
   - [설정 (Setup)](#설정-setup)
   - [설정 및 초기화 (Setup \& Init)](#설정-및-초기화-setup--init)
@@ -468,6 +472,171 @@
 
 ---
 
+# Git CLI 중급
+
+## Chapter 1 : 중급 CLI 명령어 1
+- 원격저장소 관련 명령어(원격 저장소 추가로 등록하기)
+    | **명령어**                              | **설명** |
+    | --------------------------------------- | -------- |
+    | `git remote -v`                         |          |
+    | `git remote add <저장소이름> <url>`     |          |
+    | `git remote rename <이전이름> <새이름>` |          |
+    | `git remote remove <저장소이름>`        |          |
+
+- GitHub 저장소 백업하기
+    1. 원격저장소에 백업
+        
+        ```bash
+        $ git remote add backup <url>
+        $ git checkout main
+        $ git push backup --all  # main 브랜치만 push
+        $ git push backup --all  # feature1 브랜치도 push
+
+        $ git push backup --tags  # tag push
+
+        $ git bracn -rv  # 저장소 상태 확인
+        ```
+    
+    2. 다른 Git 호스팅 서비스에 백업
+        1. AWS CodeCommit <-서울에 데이터 센터가 있어서 빠름
+        2. BitBucket
+        3. GitLab 등
+
+- clean과 hard reset
+    - git clean : 워킹트리 정리
+        | **명령어**                              | **설명**                                                                                              |
+        | --------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+        | `git clean -f -d <파일 또는 폴더 이름>` | untracked 상태의 파일들을 삭제. <br> 파일 또는 경로를 지정하지 않은 경우 모든 untracked 파일들을 삭제 |
+
+        > <span style='color: #FF7D7D; font-weight: bold'>주의 ! 삭제되면 복구가 불가능함</span>
+
+    - `reset --hard`
+        | 구분                | soft     | mixed(기본) | hard   |
+        | ------------------- | -------- | ----------- | ------ |
+        | 현재 브랜치(HEAD)   | 초기화   | 초기화      | 초기화 |
+        | 스테이지            | 남아있음 | 초기화      | 초기화 |
+        | 워킹트리의 변경사항 | 남아있음 | 남아있음    | 초기화 |
+        > <span style='color: #FF7D7D; font-weight: bold'>reset은 공통적으로 untracked 파일은 건드리지 않음</span>
+
+    - hard reset의 복구
+
+        ```bash
+        $ git reset --hard <reset --hard 하기 전 메모해둔 체크섬을 이용>
+        ```
+        > <span style='color: #FF7D7D; font-weight: bold'>로컬 저장소의 커밋은 없어지지 않음(사라진 것 처럼 안 보일 뿐)</span>
+
+<br>
+
+- **reflog로 사라진 커밋 되살리기**(reset --hard 실수 대처법)
+    > 현재까지의 모든 로컬저장소의 작업에 대해 커밋 체크섬을 볼 수 있음
+    > git log 명령으로 확인 할 수 없는 커밋을 확인할 수 있음
+    > <span style='color: blue; font-weight: bold'>★ 단, reflog의 유효범위는 로컬저장소임!!!</span>
+
+
+    | **명령어**            | **설명**                                                           |
+    | --------------------- | ------------------------------------------------------------------ |
+    | `git reflog [-n숫자]` | reflog를 보여주는 명령 -n 숫자 옵션으로 객수를 제한해서 볼 수 있음 |
+
+    ```bash
+    $ git reflog  # reflog 명령 수행
+    ```
+    **<u>Output</u>**
+    ```
+    efb2b3c (HEAD -> main, origin/main) HEAD@{0}: commit: Add Git command summaries and branch naming guidelines
+    ebceb84 HEAD@{1}: checkout: moving from hotfix to main
+    ebceb84 HEAD@{2}: checkout: moving from main to hotfix
+    ```
+    ```bash
+    $ git reset --hard HEAD@{2}  # HEAD@{2}를 이용해서 hard reset
+    ```
+
+## Chapter 2 : 중급 CLI 명령어 2
+- 커밋 수정하기(commit --amend)
+    - HEAD가 가르키는 커밋, 즉 현재 커밋을 수정하고 싶은 경우 
+    - 커밋 메시지를 바꾸고 싶은 경우 
+    - 이전 커밋의 파일 내용을 조금 수정하고 싶은 경우 
+    - 깜빡 잊고 이전 커밋에 일부 중요 파일을 추가하지 않은 경우
+    <br>
+
+    1. commit 메시지 수정하기
+        ```bash
+        $ git commit --amend -m "마지막 커밋 메시지 수정"
+        ```
+    
+    2. commit에 변경 내용 추가하기
+        ```bash
+        $ git add .
+        $ git commit --amend  # 마지막 커밋 수정
+        ```
+
+    > git push --force를 사용해야함
+    > git commit --amend 는 **원격저장소에 이미 해당 커밋이 올라가 있는 경우**에는 <span style='color: #FF7D7D; font-weight: bold'>가급적이면 사용하지 않는 것이 좋음</span>
+
+    - **참고 : 위험한 명령어들**
+        - rebase
+        - git push --force
+        - reset --hard
+        - stash
+<br>
+
+- git diff로 변경사항 체크하기
+    | **명령어**         | **설명**                                                                                                                                                                                         |
+    | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+    | `git diff [a] [b]` | a 저장소를 토대로 b저장소에 추가된 내용의 차이를 보여줌 <br> 보통 a는 작업 전, b는 작업 후 저장소 <br> 옵션을 생략하면 아직 스테이지에 추가되지 않은 변경사항 <br> 단, untracked는 보여주지 않음 |
+
+    1. 스테이징 된 내용과 마지막 커밋과의 비교
+
+        ```bash
+        $ git diff --cached
+        ```
+
+    2. 두 커밋의 비교
+
+        ```bash
+        $ git diff HEAD~ HEAD
+        ```
+
+    3. git diff --check를 통한 공백 문자 확인
+
+        ```bash
+        $ git diff --check
+        ```
+
+        **<u>Output</u>**
+        ```
+        master2.txt:2: trailing whitespace.
+        +space       
+        ```
+
+- 참고 : Git이란 도구를 커밋을 중심으로 본다면...
+    - 저장소 : 모든 커밋의 모음 
+    - 브랜치 : 특정 히스토리를 가지는 커밋의 모음 
+    - 커밋 : 파일의 묶음. Git의 기본 저장 단위 
+    - 스테이지 : 미래의 커밋 
+    - 작업 폴더(디렉토리) : 스테이지를 만들어 내기 위한 샌드박스<sup>sandbox</sup>로  이것저것 파일 내용을 작업하다가 맘에 드는 모양으로 완성되면 스테이지에 추가
+    - stash : 임시 진열장
+    
+    > 사용자 입장에서는 작업 폴더가 제일 중요하지만, **Git의 입장에서는 커밋이 제일 중요함!**
+
+- -X 옵션으로 충돌 해결하기
+    - merge에서 theirs / ours 옵션 사용하기
+
+        ```bash
+        $ git merge feature1 -X theirs
+        $ git merge feature1 -X ours
+        ```
+
+    - rebase에서 theirs / ours 옵션 사용하기
+
+- rebase -i로 커밋 정리하기
+
+    
+
+
+## Chapter 3 : 기타 CLI 명령어
+
+---
+
 # Git 명령어 요약
 - [GitHub 치트 시트 : https://education.github.com/git-cheat-sheet-education.pdf](https://education.github.com/git-cheat-sheet-education.pdf "Go to https://education.github.com/git-cheat-sheet-education.pdf")
 
@@ -522,13 +691,16 @@
 
 ## 공유 및 업데이트 (Share & Update)
 
-| **명령어**                    | **설명**                                            |
-| ----------------------------- | --------------------------------------------------- |
-| `git remote add [별칭] [URL]` | 원격 저장소를 별칭으로 추가                         |
-| `git fetch [별칭]`            | 원격 저장소의 모든 브랜치 가져오기                  |
-| `git merge [별칭]/[브랜치명]` | 원격 브랜치의 변경 사항을 현재 브랜치에 병합        |
-| `git push [별칭] [브랜치명]`  | 로컬 브랜치의 커밋을 원격 저장소에 푸시             |
-| `git pull`                    | 원격 저장소의 변경 사항을 가져와 현재 브랜치에 병합 |
+| **명령어**                              | **설명**                                            |
+| --------------------------------------- | --------------------------------------------------- |
+| `git remote -v `                        | 원격 저장소 목록                                    |
+| `git remote add [별칭] [URL]`           | 원격 저장소를 별칭으로 추가                         |
+| `git remote rename <이전이름> <새이름>` | 새로운 이름으로 변경                                |
+| `git remote remove <저장소 이름>`       | 원격저장소 삭제                                     |
+| `git fetch [별칭]`                      | 원격 저장소의 모든 브랜치 가져오기                  |
+| `git merge [별칭]/[브랜치명]`           | 원격 브랜치의 변경 사항을 현재 브랜치에 병합        |
+| `git push [별칭] [브랜치명]`            | 로컬 브랜치의 커밋을 원격 저장소에 푸시             |
+| `git pull`                              | 원격 저장소의 변경 사항을 가져와 현재 브랜치에 병합 |
 
 
 ## 임시 커밋 (Temporary Commits)
