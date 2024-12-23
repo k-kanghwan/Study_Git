@@ -8,8 +8,10 @@
 ★ : Importance
 -->
 
---- 
 # Git, GitHub
+
+--- 
+# REFERENCE OR IMPORTANCE
 > - 참조 URL
 >   - [GitHub 치트 시트 : https://education.github.com/git-cheat-sheet-education.pdf](https://education.github.com/git-cheat-sheet-education.pdf "Go to https://education.github.com/git-cheat-sheet-education.pdf")
 >   - [Pro Git : https://git-scm.com/book/ko/v2](https://git-scm.com/book/ko/v2 "Go to https://git-scm.com/book/ko/v2")
@@ -27,24 +29,23 @@
 >    |    ci    | CI 설정이 수정되었을 때(Jenkins, Travis 등)                                                     |
 >    |  chore   | 그 외 실제 <u>코드에는 영향이 없는 단순 수정</u>                                                |
 
+> - global .gitignore 만들기
+> [gitignore 생성 url : https://www.toptal.com/developers/gitignore/](https://www.toptal.com/developers/gitignore/ "Go to https://www.toptal.com/developers/gitignore/")
+>
+>   - `$ git config --global core.excludesfile ~/global_gitignore`
+
 ---
 
 <br>
 
 
-## Table of Contents
+# Table of Contents
 - [Git, GitHub](#git-github)
-  - [Table of Contents](#table-of-contents)
+- [REFERENCE OR IMPORTANCE](#reference-or-importance)
+- [Table of Contents](#table-of-contents)
+- [Git, GitHub 시작하기](#git-github-시작하기)
   - [Chapter 0 : 빠른 실습으로 Git, GitHub 감 익히기](#chapter-0--빠른-실습으로-git-github-감-익히기)
-    - [로컬저장소에서 커밋 관리하기](#로컬저장소에서-커밋-관리하기)
-    - [다른 커밋으로 시간여행하기](#다른-커밋으로-시간여행하기)
-    - [GitHub 원격 저장소에 커밋 올리기](#github-원격-저장소에-커밋-올리기)
-    - [GitHub 원격 저장소의 커밋을 로컬 저장소에 내려받기](#github-원격-저장소의-커밋을-로컬-저장소에-내려받기)
-    - [단어정리](#단어정리)
   - [Chapter 1 : GUI를 위한 버전 관리 환경 구축하기](#chapter-1--gui를-위한-버전-관리-환경-구축하기)
-    - [소스트리 설치하기](#소스트리-설치하기)
-    - [비주얼 스튜디오 코드 설치하기](#비주얼-스튜디오-코드-설치하기)
-    - [GitHub 둘러보기](#github-둘러보기)
   - [Chapter 2 ~ Chapter 3 : GIT GUI With. SourceTree](#chapter-2--chapter-3--git-gui-with-sourcetree)
   - [Chapter 4 : 둘 이상의 원격 저장소로 협업하기](#chapter-4--둘-이상의-원격-저장소로-협업하기)
   - [Chapter 5 : 실무 사례와 함께 Git 다루기](#chapter-5--실무-사례와-함께-git-다루기)
@@ -78,113 +79,114 @@
   - [브랜치 작성 팁](#브랜치-작성-팁)
 
 
+# Git, GitHub 시작하기
 ## Chapter 0 : 빠른 실습으로 Git, GitHub 감 익히기
-###  로컬저장소에서 커밋 관리하기
-1. 로컬 저장소 만들기
-    ```bash
-    $ git init
-    ```
-
-    **<u>Output</u>**
-    ```
-    Initialized empty Git repository in {path}
-    ```
-    
-
-2. 첫번째 커밋 만들기
-    1. 정보 등록
+- 로컬저장소에서 커밋 관리하기
+    1. 로컬 저장소 만들기
         ```bash
-        $ git config --global user.email "star2kis@nate.com"
-        $ git config --global user.name "KangHwan-Cha"
+        $ git init
         ```
 
-    2. 파일 추가
+        **<u>Output</u>**
+        ```
+        Initialized empty Git repository in {path}
+        ```
+        
+
+    2. 첫번째 커밋 만들기
+        1. 정보 등록
+            ```bash
+            $ git config --global user.email "star2kis@nate.com"
+            $ git config --global user.name "KangHwan-Cha"
+            ```
+
+        2. 파일 추가
+            ```bash
+            $ git add README.md
+            또는 
+            $ git add .
+            ```
+
+        3. 커밋하기
+            ```bash
+            $ git commit -m "My first commit"
+            ```
+
+- 다른 커밋으로 시간여행하기
+    1. `git log`: 커밋 확인
+        - git log 명령은 최신 커밋부터 보여줌
+    2. `git checkout {커밋 ID}`
+    3. `git checkout -`: 최근에 있던 브랜치로 이동
+
+    <br>
+
+    > 최근 `switch` / `restore`명령어로 나누어짐
+    > 1. **`switch`**: 브랜치 간 이동
+    > 2. **`restore`**: 커밋에서 파일들을 복구
+
+- GitHub 원격 저장소에 커밋 올리기
+
+    1. 레포지토리: 원격 저장소
+    2. 원격저장소 만들기
+        > [Git 레포지토리](https://github.com/KangHwan-Cha?tab=repositories "Go to https://github.com/KangHwan-Cha?tab=repositories")
+    3. 원격 저장소 url: https://github.com/KangHwan-Cha/Study_Git.git
+
+    4. ★ **원격 저장소에 커밋 올리기**
         ```bash
-        $ git add README.md
-        또는 
-        $ git add .
+        # 원격 저장소 주소 입력
+        $ git remote add origin https://github.com/KangHwan-Cha/Study_Git.git
+        # 브랜치 만들기
+        $ git branch -M main
+        # 원격 저장소에 올리기
+        $ git push origin main
         ```
 
-    3. 커밋하기
+- GitHub 원격 저장소의 커밋을 로컬 저장소에 내려받기
+    1. 클론<sup>clone</sup>: 코드와 버전 전체를 내려받기
+        > [Download ZIP] 으로 받으면 원격 저장소와 버전정보가 제외되므로 `git clone`을 사용
+        
         ```bash
-        $ git commit -m "My first commit"
+        # 주소 뒤에 한칸 띄고 마침표
+        # 마침표를 붙이면 현재 위치에 clone
+        $ git clone {원격 저장소 주소} .  
         ```
 
-### 다른 커밋으로 시간여행하기
-1. `git log`: 커밋 확인
-    - git log 명령은 최신 커밋부터 보여줌
-2. `git checkout {커밋 ID}`
-3. `git checkout -`: 최근에 있던 브랜치로 이동
-
-<br>
-
-> 최근 `switch` / `restore`명령어로 나누어짐
-> 1. **`switch`**: 브랜치 간 이동
-> 2. **`restore`**: 커밋에서 파일들을 복구
-
-### GitHub 원격 저장소에 커밋 올리기
-
-1. 레포지토리: 원격 저장소
-2. 원격저장소 만들기
-    > [Git 레포지토리](https://github.com/KangHwan-Cha?tab=repositories "Go to https://github.com/KangHwan-Cha?tab=repositories")
-3. 원격 저장소 url: https://github.com/KangHwan-Cha/Study_Git.git
-
-4. ★ **원격 저장소에 커밋 올리기**
-    ```bash
-    # 원격 저장소 주소 입력
-    $ git remote add origin https://github.com/KangHwan-Cha/Study_Git.git
-    # 브랜치 만들기
-    $ git branch -M main
-    # 원격 저장소에 올리기
-    $ git push origin main
-    ```
-
-### GitHub 원격 저장소의 커밋을 로컬 저장소에 내려받기
-1. 클론<sup>clone</sup>: 코드와 버전 전체를 내려받기
-    > [Download ZIP] 으로 받으면 원격 저장소와 버전정보가 제외되므로 `git clone`을 사용
-    
-    ```bash
-    # 주소 뒤에 한칸 띄고 마침표
-    # 마침표를 붙이면 현재 위치에 clone
-    $ git clone {원격 저장소 주소} .  
-    ```
-
-2. 원격 저장소의 새로운 커밋을 로컬 저장소에 갱신하기
-    
-    ```bash
-    $ git pull origin main
-    ```
+    2. 원격 저장소의 새로운 커밋을 로컬 저장소에 갱신하기
+        
+        ```bash
+        $ git pull origin main
+        ```
 
 
-### 단어정리
+- 단어정리
 
-- **Git**: 분산 버전 관리 시스템으로, <u>파일 변경 이력 관리</u> 및 협업을 위한 도구.
-- **GitHub**: Git을 기반으로 한 웹 서비스로, <u>소스 코드 호스팅</u> 및 협업 기능을 제공.
-- **GUI** <sup>Graphical User Interface</sup> : 그래픽 사용자 인터페이스로, 명령어 대신 그래픽 요소로 시스템과 상호작용하는 방식.
-- **CLI** <sup>Command Line Interface</sup>: 명령어를 입력해 시스템과 상호작용하는 텍스트 기반 인터페이스.
-- **Git Bash**: Git을 명령어 기반으로 사용할 수 있게 해주는 터미널 프로그램. Git과 Bash 쉘을 지원.
-- **commit**: Git에서 파일의 변경 사항을 저장하는 단위. 각 커밋은 고유한 ID를 가짐.
-- **log**: Git에서 커밋 이력을 확인할 수 있는 명령어. `git log` 명령어를 사용해 커밋 내역을 볼 수 있음.
-- **checkout**: 특정 브랜치나 커밋으로 작업 공간을 변경하는 Git 명령어. `git checkout <브랜치명>`으로 사용.
-- **워킹트리**<sup>working tree</sup>: 작업폴더 [.git]폴더를 뺀 나머지 부분이 워킹트리.
-- **로컬 저장소**: 사용자의 컴퓨터에 저장된 Git 레포지토리로, 소스 코드와 이력을 포함. [.git]폴더가 로컬 저장소
-- **원격 저장소**: GitHub, GitLab 등 외부 서버에 호스팅된 Git 레포지토리로, 협업을 위한 공유 공간.
-- **repository**: 프로젝트의 소스 코드 및 변경 이력을 저장하는 Git 저장소. 로컬과 원격 저장소가 있음.
-- **push**: 로컬 저장소의 변경 사항을 원격 저장소로 전송하는 Git 명령어. `git push`를 사용.
-- **pull**: 원격 저장소에서 변경 사항을 로컬 저장소로 가져오는 Git 명령어. `git pull`을 사용.
+    - **Git**: 분산 버전 관리 시스템으로, <u>파일 변경 이력 관리</u> 및 협업을 위한 도구.
+    - **GitHub**: Git을 기반으로 한 웹 서비스로, <u>소스 코드 호스팅</u> 및 협업 기능을 제공.
+    - **GUI** <sup>Graphical User Interface</sup> : 그래픽 사용자 인터페이스로, 명령어 대신 그래픽 요소로 시스템과 상호작용하는 방식.
+    - **CLI** <sup>Command Line Interface</sup>: 명령어를 입력해 시스템과 상호작용하는 텍스트 기반 인터페이스.
+    - **Git Bash**: Git을 명령어 기반으로 사용할 수 있게 해주는 터미널 프로그램. Git과 Bash 쉘을 지원.
+    - **commit**: Git에서 파일의 변경 사항을 저장하는 단위. 각 커밋은 고유한 ID를 가짐.
+    - **log**: Git에서 커밋 이력을 확인할 수 있는 명령어. `git log` 명령어를 사용해 커밋 내역을 볼 수 있음.
+    - **checkout**: 특정 브랜치나 커밋으로 작업 공간을 변경하는 Git 명령어. `git checkout <브랜치명>`으로 사용.
+    - **워킹트리**<sup>working tree</sup>: 작업폴더 [.git]폴더를 뺀 나머지 부분이 워킹트리.
+    - **로컬 저장소**: 사용자의 컴퓨터에 저장된 Git 레포지토리로, 소스 코드와 이력을 포함. [.git]폴더가 로컬 저장소
+    - **원격 저장소**: GitHub, GitLab 등 외부 서버에 호스팅된 Git 레포지토리로, 협업을 위한 공유 공간.
+    - **repository**: 프로젝트의 소스 코드 및 변경 이력을 저장하는 Git 저장소. 로컬과 원격 저장소가 있음.
+    - **push**: 로컬 저장소의 변경 사항을 원격 저장소로 전송하는 Git 명령어. `git push`를 사용.
+    - **pull**: 원격 저장소에서 변경 사항을 로컬 저장소로 가져오는 Git 명령어. `git pull`을 사용.
 
 ## Chapter 1 : GUI를 위한 버전 관리 환경 구축하기
-### 소스트리 설치하기
+- 소스트리 설치하기
 1. Sourcetree([Click](https://www.sourcetreeapp.com "Go to https://www.sourcetreeapp.com"))
 
 <p style="text-align: center;">
     <img width="600" height="" src="image/Sourcetree.png">
 </p>
 
-### 비주얼 스튜디오 코드 설치하기
+- 비주얼 스튜디오 코드 설치하기
 > 이미 사용하고있으므로 Pass
 
-### GitHub 둘러보기
+- GitHub 둘러보기
 > 책 참조
 
 ## Chapter 2 ~ Chapter 3 : GIT GUI <sub>With. SourceTree</sub>
@@ -627,13 +629,86 @@
         ```
 
     - rebase에서 theirs / ours 옵션 사용하기
+<br>
 
 - rebase -i로 커밋 정리하기
+    > rebase와 rebase -i는 전혀 다른 별개의 명령
+    > **해당 커밋의 후손 커밋만 에디터에 표시**
+    > 흑역사 커밋 삭제하기!
+    - 커밋들의 순서변경
+    - 한 커밋을 다른 커밋과 합치기 
+    - 커밋 삭제 
+    - 커밋 메시지 수정 
+    - 오래된 커밋의 수정 <sup>ammend</sup>
+    
+    - **option**
+        1. p <sup>pick</sup> : 해당 커밋을 변경없이 사용 
+        2. r <sup>reword</sup> : 해당 커밋을 사용, <u>커밋 메시지 편집 가능</u>
+        3. e <sup>edit</sup> : 해당 커밋을 사용, 커밋을 수정(amen)할 수 있도록 일시정지 상태가 됨
+        4. s <sup>squash</sup> : 해당 커밋을 사용, 단 내용은 부모 커밋에 합쳐지고 커밋은 사라진 것 처럼 보임
+        5. d <sup>drop</sup> : 해당 커밋을 제거
+
+    | **명령어**                                      | **설명**                                                                                  |
+    | ----------------------------------------------- | ----------------------------------------------------------------------------------------- |
+    | `git rebase -i <수정하려는 커밋들의 부모 커밋>` | HEAD와 지정한 커밋 사이의 커밋들의 히스토리를 수정 <br> git log 명령과를 목록 순서가 반대 |
 
     
+    - rebase -i로 커밋 순서 바꾸기
 
+        ```bash
+        $ git rebase -i HEAD~2
+        ```
+
+    - 중간의 커밋 메시지 바꾸기
+
+        ```bash
+        $ git rebase -i HEAD~2
+        # 에디터에서 pick을 reword로 변경
+        # 다시 에디터가 활성되면 원하는 commit 메시지로 수정
+        ```
+
+    - 커밋을 이전 커밋이랑 합치기
+
+        ```bash
+        $ git rebase -i HEAD~2
+        # 에디터에서 pick을 squash로 변경
+        # 다시 에디터가 활성되면 원하는 commit 메시지로 수정
+        ```
+        > <span style='color: #FF7D7D; font-weight: bold'>squash 대상 커밋이 이전 커밋에 합쳐지는 것에 주의!</span>
+
+- cherry-pick으로 커밋 골라먹기
+    > 다른 브랜치에 있는 특정 커밋을 골라 현재 브랜치에 합칠 때 주로 사용
+
+    ```bash
+    $ git cherry-pick <커밋 체크섬>
+    ```
 
 ## Chapter 3 : 기타 CLI 명령어
+- Git stash로 임시 저장하기
+    > 변경사항을 커밋하기도, 삭제하기도 모호한 상황에서 주로 사용
+    >   - ex) 약간의 변경사항이 있는데 이를 남겨놓고 다른 브랜치를 체크아웃하려는 상황에서 사용
+
+- stash 내용을 다른 브랜치에 적용
+    ```bash
+    $ git stash -u
+    $ git switch -c stash-test
+    $ git stash pop 또는 apply
+    ```
+
+- 히스토리에서 파일 삭제하기
+    > 민감 정보가 이미 커밋이나 푸시되었을 떄 삭제하는 방법
+
+    ```bash
+    $ git filter-branch -f --tree-fileter 'rm -f file1.txt' HEAD  # filter-granch 명령 수행
+    ```
+
+- 기타 팁
+    - global .gitignore 만들기
+        > [gitignore 생성 url : https://www.toptal.com/developers/gitignore/](https://www.toptal.com/developers/gitignore/ "Go to https://www.toptal.com/developers/gitignore/")
+
+        ```bash
+        $ git config --global core.excludesfile ~/global_gitignore
+        ```
 
 ---
 
@@ -705,12 +780,16 @@
 
 ## 임시 커밋 (Temporary Commits)
 
-| **명령어**       | **설명**                                                         |
-| ---------------- | ---------------------------------------------------------------- |
-| `git stash`      | 수정된 추적 파일을 임시로 저장하여 작업 디렉토리를 깨끗하게 유지 |
-| `git stash list` | 저장된 스태시 목록 표시                                          |
-| `git stash pop`  | 가장 최근의 스태시를 적용하고, 스태시 목록에서 제거              |
-| `git stash drop` | 가장 최근의 스태시를 스태시 목록에서 제거                        |
+| **명령어**                      | **설명**                                                                                                                                                                              |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `git stash <-u>`                | 수정된 추적 파일을 임시로 저장하여 작업 디렉토리를 깨끗하게 유지 <br> 기본적으로 untracked 상태의 파일은 저장하지 않지만 <br> -u 옵션을 함께 사용할 경우 untracked 상태의 파일도 저장 |
+| `git stash list`                | 저장된 스태시 목록 표시                                                                                                                                                               |
+| `git stash pop <stash 객체>`    | 가장 최근의 스태시를 적용하고, 스태시 목록에서 제거                                                                                                                                   |
+| `git stash apply <stash 객체>`  | pop과 동일하지만, 스택에 있는 stash 객체를 제거하지 않음 <br> pop보다는 약간 안전한 명령어                                                                                            |
+| `git stash drop <stash 객체>`   | 가장 최근의 스태시를 스태시 목록에서 제거                                                                                                                                             |
+| `git stash clear`               | 스택의 모든 stash 객체를 삭제                                                                                                                                                         |
+| `git stash branch <stash 객체>` | 마지막에 체크아웃된 커밋에 stash 내용을 반영해서 새로운 브랜치를 만듭니다. <br> 테스트를 할 때 의외로 유용하게 사용                                                                   |
+
 
 
 ## 비교 및 확인 (Inspect & Compare)
