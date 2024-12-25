@@ -10,8 +10,8 @@
 
 # Git, GitHub
 
---- 
-# REFERENCE OR IMPORTANCE
+📚🔗 **Reference and Quick**
+
 > - 참조 URL
 >   - [GitHub 치트 시트 : https://education.github.com/git-cheat-sheet-education.pdf](https://education.github.com/git-cheat-sheet-education.pdf "Go to https://education.github.com/git-cheat-sheet-education.pdf")
 >   - [Pro Git : https://git-scm.com/book/ko/v2](https://git-scm.com/book/ko/v2 "Go to https://git-scm.com/book/ko/v2")
@@ -34,6 +34,12 @@
 >
 >   - `$ git config --global core.excludesfile ~/global_gitignore`
 
+> - **태그 생성 및 푸시**
+>     GitHub의 [Tags] 탭에서 확인할 수 있고, [Release] 탭에서 다운받을 수 있다는 것!
+>     ```bash
+>     $ git tag -a -m "첫 번째 태그 생성" v0.1  # 주석 있는 태그 생성
+>     $ git push origin v0.1  # 태그 푸시
+>     ```
 ---
 
 <br>
@@ -41,7 +47,6 @@
 
 # Table of Contents
 - [Git, GitHub](#git-github)
-- [REFERENCE OR IMPORTANCE](#reference-or-importance)
 - [Table of Contents](#table-of-contents)
 - [Git, GitHub 시작하기](#git-github-시작하기)
   - [Chapter 0 : 빠른 실습으로 Git, GitHub 감 익히기](#chapter-0--빠른-실습으로-git-github-감-익히기)
@@ -78,6 +83,9 @@
     - [릴리스 브랜치](#릴리스-브랜치)
   - [브랜치 작성 팁](#브랜치-작성-팁)
 
+---
+
+<p style='page-break-before: always;'></p>
 
 # Git, GitHub 시작하기
 ## Chapter 0 : 빠른 실습으로 Git, GitHub 감 익히기
@@ -147,7 +155,7 @@
         
         ```bash
         # 주소 뒤에 한칸 띄고 마침표
-        # 마침표를 붙이면 현재 위치에 clone
+        # 마침표를 붙이면 현재 위치에 풀어서 clone
         $ git clone {원격 저장소 주소} .  
         ```
 
@@ -179,9 +187,9 @@
 - 소스트리 설치하기
 1. Sourcetree([Click](https://www.sourcetreeapp.com "Go to https://www.sourcetreeapp.com"))
 
-<p style="text-align: center;">
-    <img width="600" height="" src="image/Sourcetree.png">
-</p>
+    <p style="text-align: center;">
+        <img width="600" height="" src="image/Sourcetree.png">
+    </p>
 
 - 비주얼 스튜디오 코드 설치하기
 > 이미 사용하고있으므로 Pass
@@ -226,6 +234,7 @@
 
     - **VERSION** 
         - ver 1<sup>a)</sup> .0<sup>b)</sup>.0<sup>c)</sup>
+
             a) : Major - 사용자들이 크게 느낄 변화
             b) : Minor - 작은 변화 등
             c) : Maintenance - 버그나 유지 보수 등 작은 수정
@@ -237,7 +246,7 @@
     | 명령   | 의의                                     | 편리한 점                                                                          | 불편한 점                                               |
     | ------ | ---------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------- |
     | 브랜치 | 하나의 원본 저장소에서 분기를 나눈다.    | 하나의 원본 저장소에서 코드 커밋 이력을 편하게 볼 수 있다                          | 다수의 사용자가 다수의 브랜치를 만들면 관리하기 힘들다. |
-    | 포크   | 여러 원격 저장소를 만들어 분기는 나눈다. | 원본 저장소에 영향을 미치지 않으므로 원격 저장소에서 마음껏 코드를 수정할 수 있다. | 원본 저장소의 이력을 보려면 따로 주소를 추가해야 한다.  |
+    | 포크   | 여러 원격 저장소를 만들어 분기를 나눈다. | 원본 저장소에 영향을 미치지 않으므로 원격 저장소에서 마음껏 코드를 수정할 수 있다. | 원본 저장소의 이력을 보려면 따로 주소를 추가해야 한다.  |
 
 - **리베이스**<sup>rebase</sup> : 묵은 커밋을 새 커밋으로 이력 조작하기
     > - 커밋의 베이스를 똑 떼서 다른 곳으로 붙이는 것
@@ -339,7 +348,7 @@
     $ git config --global color.ui auto  # Git Bash 창의 Git 컬러가 자동으로 설정
     ```
 
-- Git 명령어 옵션 설정
+- Git 명령어 옵션 **우선순위**
     > local<sup>지역</sup> > global<sup>전역</sup> > system<sup>시스템</sup>
 
 
@@ -460,30 +469,33 @@
 
 - **Git 작동원리 핵심**
     1. **`git add`**  
-    - 워킹 트리(Working Tree)의 변경 내용을 **스테이징 영역(Staging Area)** 에 반영.  
-    - 커밋에 포함할 파일과 변경 사항을 선택하여 준비하는 단계.
+        - 워킹 트리(Working Tree)의 변경 내용을 **스테이징 영역(Staging Area)** 에 반영.  
+        - 커밋에 포함할 파일과 변경 사항을 선택하여 준비하는 단계.
 
     2. **`git commit`**  
-    - **스테이징 영역**의 내용을 기반으로 **트리(Tree) 객체**를 생성.  
-    - 생성된 트리 객체를 이용해 기존 **HEAD 커밋**을 부모로 하는 새로운 커밋을 만듦.  
-    - 커밋 메시지와 함께 변경 내역이 로컬 저장소 히스토리에 추가.
+        - **스테이징 영역**의 내용을 기반으로 **트리(Tree) 객체**를 생성.  
+        - 생성된 트리 객체를 이용해 기존 **HEAD 커밋**을 부모로 하는 새로운 커밋을 만듦.  
+        - 커밋 메시지와 함께 변경 내역이 로컬 저장소 히스토리에 추가.
 
     3. **HEAD 업데이트**  
-    - 새롭게 생성된 커밋이 현재 **HEAD**가 가리키는 위치가 됨.  
-    - HEAD는 기본적으로 현재 브랜치의 최신 커밋을 참조.
+        - 새롭게 생성된 커밋이 현재 **HEAD**가 가리키는 위치가 됨.  
+        - HEAD는 기본적으로 현재 브랜치의 최신 커밋을 참조.
+
 
 ---
+
+<p style='page-break-before: always;'></p>
 
 # Git CLI 중급
 
 ## Chapter 1 : 중급 CLI 명령어 1
 - 원격저장소 관련 명령어(원격 저장소 추가로 등록하기)
-    | **명령어**                              | **설명** |
-    | --------------------------------------- | -------- |
-    | `git remote -v`                         |          |
-    | `git remote add <저장소이름> <url>`     |          |
-    | `git remote rename <이전이름> <새이름>` |          |
-    | `git remote remove <저장소이름>`        |          |
+    | **명령어**                              |
+    | --------------------------------------- |
+    | `git remote -v`                         |
+    | `git remote add <저장소이름> <url>`     |
+    | `git remote rename <이전이름> <새이름>` |
+    | `git remote remove <저장소이름>`        |
 
 - GitHub 저장소 백업하기
     1. 원격저장소에 백업
@@ -712,6 +724,8 @@
 
 ---
 
+<p style='page-break-before: always;'></p>
+
 # Git 명령어 요약
 - [GitHub 치트 시트 : https://education.github.com/git-cheat-sheet-education.pdf](https://education.github.com/git-cheat-sheet-education.pdf "Go to https://education.github.com/git-cheat-sheet-education.pdf")
 
@@ -820,6 +834,8 @@
 | `git config --global core.excludesfile [파일]` | 모든 로컬 저장소에 적용할 전역 .gitignore 파일 설정 |
 
 ---
+
+<p style='page-break-before: always;'></p>
 
 # 브랜치명 작성 가이드
 
