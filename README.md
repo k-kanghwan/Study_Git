@@ -1,7 +1,8 @@
 <!-- *NOTE* for writting up markdown -->
 <!-- 
+  # => Category
   ## => chapter
-  ### => section in chapter
+  - => section(list) in chapter
 
 1. => section number in section
 
@@ -482,8 +483,6 @@
         - HEAD는 기본적으로 현재 브랜치의 최신 커밋을 참조.
 
 
----
-
 <p style='page-break-before: always;'></p>
 
 # Git CLI 중급
@@ -708,7 +707,7 @@
     ```
 
 - 히스토리에서 파일 삭제하기
-    > 민감 정보가 이미 커밋이나 푸시되었을 떄 삭제하는 방법
+    > 민감 정보가 이미 커밋이나 푸시되었을 때 삭제하는 방법
 
     ```bash
     $ git filter-branch -f --tree-fileter 'rm -f file1.txt' HEAD  # filter-granch 명령 수행
@@ -721,8 +720,6 @@
         ```bash
         $ git config --global core.excludesfile ~/global_gitignore
         ```
-
----
 
 <p style='page-break-before: always;'></p>
 
@@ -833,7 +830,6 @@
 | ---------------------------------------------- | --------------------------------------------------- |
 | `git config --global core.excludesfile [파일]` | 모든 로컬 저장소에 적용할 전역 .gitignore 파일 설정 |
 
----
 
 <p style='page-break-before: always;'></p>
 
@@ -868,8 +864,6 @@
 ### 릴리스 브랜치
 - `release/v1.0.0`
 - `release/v2.1.3`
-
----
 
 ## 브랜치 작성 팁
 - **소문자와 하이픈 사용**: 예) `feature/add-new-api`
