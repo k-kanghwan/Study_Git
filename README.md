@@ -655,7 +655,7 @@
     - **option**
         1. p <sup>pick</sup> : 해당 커밋을 변경없이 사용 
         2. r <sup>reword</sup> : 해당 커밋을 사용, <u>커밋 메시지 편집 가능</u>
-        3. e <sup>edit</sup> : 해당 커밋을 사용, 커밋을 수정(amen)할 수 있도록 일시정지 상태가 됨
+        3. e <sup>edit</sup> : 해당 커밋을 사용, 커밋을 수정(amend)할 수 있도록 일시정지 상태가 됨
         4. s <sup>squash</sup> : 해당 커밋을 사용, 단 내용은 부모 커밋에 합쳐지고 커밋은 사라진 것 처럼 보임
         5. d <sup>drop</sup> : 해당 커밋을 제거
 
