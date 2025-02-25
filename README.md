@@ -507,7 +507,7 @@
 
         $ git push backup --tags  # tag push
 
-        $ git bracn -rv  # 저장소 상태 확인
+        $ git branch -rv  # 저장소 상태 확인
         ```
     
     2. 다른 Git 호스팅 서비스에 백업
